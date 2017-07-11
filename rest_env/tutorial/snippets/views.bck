@@ -1,0 +1,55 @@
+
+from snippets.models import Snippet
+from snippets.serializers import SnippetSerializer
+from rest_framework import mixins
+from rest_framework import generics
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+from django.http import HttpResponse, JsonResponse
+
+import cozmo
+import logging
+import json
+
+text_to_say = "Una cervecita, por favor"
+
+def cozmo_program(robot: cozmo.robot.Robot):
+    say_hello(robot)
+
+def say_hello(robot: cozmo.robot.Robot):
+    robot.say_text(text_to_say).wait_for_completed()
+
+class SnippetList(mixins.ListModelMixin,
+                  mixins.CreateModelMixin,
+                  generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        data = JSONParser().parse(request)
+        print(data["code"])
+        global text_to_say
+        text_to_say = data["code"]
+        self.robot = None
+        cozmo.run_program(cozmo_program)
+        # return self.create(request, *args, **kwargs)
+        return JsonResponse("texto completado", status=200, safe=False)
+
+class SnippetDetail(mixins.RetrieveModelMixin,
+                    mixins.UpdateModelMixin,
+                    mixins.DestroyModelMixin,
+                    generics.GenericAPIView):
+    queryset = Snippet.objects.all()
+    serializer_class = SnippetSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
