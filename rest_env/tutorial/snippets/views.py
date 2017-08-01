@@ -393,7 +393,7 @@ cozmo_is_busy = False
 robot = None
 cube_in_lift = None
 pose_dict = {}
-debug = "OFF"
+debug = "ON"
 
 def run_robot(sdk_conn):
     print("Getting Robot access")
