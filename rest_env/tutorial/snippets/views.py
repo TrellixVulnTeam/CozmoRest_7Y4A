@@ -528,7 +528,7 @@ def go(distance_to_go, speed_to_go, robot):
         print("COZMO TO GO")
         print("    Distance to go = %s " % distance_to_go)
         print("    Speed to go = %s " % speed_to_go)
-        print("    Robot = %s " % Robot)
+        print("    Robot = %s " % robot)
     try:
         robot.drive_straight(distance_mm(distance_to_go), speed_mmps(speed_to_go), in_parallel=True).wait_for_completed()
         if debug == "ON":
