@@ -524,7 +524,7 @@ def say(text_to_say, robot):
 # --------------------------------------------------------------------------------------------
 
 def go(distance_to_go, speed_to_go, robot):
-    if debug == "ON"
+    if debug == "ON":
         print("COZMO TO GO")
         print("    Distance to go = %s " % distance_to_go)
         print("    Speed to go = %s " % speed_to_go)
@@ -538,7 +538,7 @@ def go(distance_to_go, speed_to_go, robot):
 # -----------------------------------------------------------------
 
 def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot):
-    if debug == "ON"
+    if debug == "ON":
             print("COZMO DRIVE WHEELS")
             print("    Distance to go = %s " % distance_to_go)
             print("    Speed to go = %s " % speed_to_go)
