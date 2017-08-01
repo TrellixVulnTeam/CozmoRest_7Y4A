@@ -540,8 +540,10 @@ def go(distance_to_go, speed_to_go, robot):
 def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot):
     if debug == "ON":
             print("COZMO DRIVE WHEELS")
-            print("    Distance to go = %s " % distance_to_go)
-            print("    Speed to go = %s " % speed_to_go)
+            print("    Speed Left = %s " % speed_left_wheel)
+            print("    Speed Right= %s " % speed_right_wheel)
+            print("    Time To Drive = %s " % time_to_drive)
+            print("    Robot = %s " % robot)
     try:
         robot.drive_wheels(speed_left_wheel, speed_right_wheel, duration=float(time_to_drive)).wait_for_completed()
     except:
