@@ -548,7 +548,7 @@ def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot
             print("    Time To Drive = %s " % time_to_drive)
             print("    Robot = %s " % robot)
     try:
-        action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1, r_wheel_acc=1, duration=float(time_to_drive))
+        action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1000, r_wheel_acc=1000, duration=float(time_to_drive))
         if debug == "ON":
             print("WAIT FOR ACTION COMPLETE")
         # action.wait_for_completed()
