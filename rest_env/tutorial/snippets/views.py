@@ -550,11 +550,12 @@ def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot
             print("    Robot = %s " % robot)
     try:
         action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1000, r_wheel_acc=1000, duration=float(time_to_drive))
+
         if debug == "ON":
-            print("WAIT FOR ACTION COMPLETE")
-        # action.wait_for_completed()
-        # if debug == "ON":
-        #    print("COZMO TO GO COMPLETED")
+            print("got action", action)
+        result = action.wait_for_completed(timeout=30)
+        if debug == "ON":
+                print("got action result", result)
     except:
         print(sys.exc_info()[0])
 
