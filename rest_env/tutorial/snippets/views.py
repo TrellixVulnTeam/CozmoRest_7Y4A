@@ -502,6 +502,7 @@ def run_commands(robot, commands_to_cozmo):
 
 def abort_actions(robot):
     robot.abort_all_actions()
+    robot.stop_all_motors()
 
 # -----------------------------------
 # FUNCTION: MOVE OUT ROBOT FROM THE CHARGER TO ENABLE MOTION
