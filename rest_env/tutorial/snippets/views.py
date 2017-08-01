@@ -393,6 +393,7 @@ cozmo_is_busy = False
 robot = None
 cube_in_lift = None
 pose_dict = {}
+debug = "OFF"
 
 def run_robot(sdk_conn):
     print("Getting Robot access")
@@ -415,6 +416,11 @@ def run_commands(robot, commands_to_cozmo):
             print(x['command'])
             if x['command'] == "ABORT_ACTIONS":
                 abort_actions(robot)
+                commands_to_cozmo = None
+            elif x['command'] == "DEBUG":
+                global debug
+                debug = x['params'][0]['LEVEL']
+                print("Debug has set to %s" % debug)
             elif x['command'] == "WAIT":
                 time_to_wait = x['params'][0]['Miliseconds']
                 print("Sleep START")
@@ -518,7 +524,10 @@ def say(text_to_say, robot):
 # --------------------------------------------------------------------------------------------
 
 def go(distance_to_go, speed_to_go, robot):
-    print("COZMO TO GO")
+    if debug == "ON"
+        print("COZMO TO GO")
+        print("    Distance to go = %s " % distance_to_go)
+        print("    Speed to go = %s " % speed_to_go)
     try:
         robot.drive_straight(distance_mm(distance_to_go), speed_mmps(speed_to_go), in_parallel=True).wait_for_completed()
     except:
@@ -529,11 +538,15 @@ def go(distance_to_go, speed_to_go, robot):
 # -----------------------------------------------------------------
 
 def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot):
-    print("COZMO DRIVE WHEELS")
+    if debug == "ON"
+            print("COZMO DRIVE WHEELS")
+            print("    Distance to go = %s " % distance_to_go)
+            print("    Speed to go = %s " % speed_to_go)
     try:
-        robot.drive_wheels(speed_left_wheel, speed_right_wheel, duration=float(time_to_drive))
+        robot.drive_wheels(speed_left_wheel, speed_right_wheel, duration=float(time_to_drive)).wait_for_completed()
     except:
         print(sys.exc_info()[0])
+
 
 # -------------------------------------------------
 # FUNCTION: ROBOT TO TURN "degrees_to_turn" DEGREES
