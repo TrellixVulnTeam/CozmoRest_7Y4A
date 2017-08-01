@@ -732,6 +732,7 @@ def cozmo_pickup_cube(cube_to_pickup, robot):
         print("got action", action)
         result = action.wait_for_completed(timeout=30)
         print("got action result", result)
+        global cube_in_lift
         cube_in_lift = cube_found
         #robot.go_to_pose(initial_pose).wait_for_completed()
         #robot.turn_in_place(degrees(90)).wait_for_completed()
@@ -744,9 +745,9 @@ def cozmo_pickup_cube(cube_to_pickup, robot):
 #------------------------------
 
 def cozmo_drop_cube(robot):
-    print("COZMO TO DROP CUBE %s")
-
     global cube_in_lift
+    if debug == "ON":
+        print("COZMO TO DROP CUBE %s " % cube_in_lift)
     action = robot.place_object_on_ground_here(cube_in_lift)
     print("got action", action)
     result = action.wait_for_completed(timeout=30)
