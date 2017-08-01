@@ -530,7 +530,7 @@ def go(distance_to_go, speed_to_go, robot):
         print("    Speed to go = %s " % speed_to_go)
         print("    Robot = %s " % robot)
     try:
-        robot.drive_straight(distance_mm(distance_to_go), speed_mmps(speed_to_go), in_parallel=True).wait_for_completed()
+        robot.drive_straight(distance_mm(distance_to_go), speed_mmps(speed_to_go)).wait_for_completed()
         if debug == "ON":
             print("COZMO TO GO COMPLETED")
     except:
@@ -548,7 +548,7 @@ def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot
             print("    Time To Drive = %s " % time_to_drive)
             print("    Robot = %s " % robot)
     try:
-        action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, duration=float(time_to_drive))
+        action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1, r_wheel_acc=1, duration=float(time_to_drive))
         if debug == "ON":
             print("WAIT FOR ACTION COMPLETE")
         # action.wait_for_completed()
