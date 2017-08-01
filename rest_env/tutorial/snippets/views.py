@@ -728,7 +728,7 @@ def cozmo_pickup_cube(cube_to_pickup, robot):
         print ("CUBE FOUND!!")
         # cube_found.set_lights(cozmo.lights.green_light.flash())
         #initial_pose = robot.pose
-        action = robot.pickup_object(cube_found)
+        action = robot.pickup_object(cube_found, num_retries=3)
         print("got action", action)
         result = action.wait_for_completed(timeout=30)
         print("got action result", result)
