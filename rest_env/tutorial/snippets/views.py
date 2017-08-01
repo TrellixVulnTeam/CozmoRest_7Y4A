@@ -517,7 +517,7 @@ def move_out_charger(robot):
 
 def say(text_to_say, robot):
     print("COZMO TO SAY")
-    robot.say_text(text_to_say, in_parallel=True).wait_for_completed()
+    robot.say_text(text_to_say).wait_for_completed()
 
 
 # --------------------------------------------------------------------------------------------
@@ -566,7 +566,7 @@ def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot
 def turn(degrees_to_turn, robot):
     print("ROTATE COZMO")
     try:
-        robot.turn_in_place(degrees(int(degrees_to_turn)), in_parallel=True).wait_for_completed()
+        robot.turn_in_place(degrees(int(degrees_to_turn))).wait_for_completed()
     except:
         print(sys.exc_info()[0])
 
@@ -577,7 +577,7 @@ def turn(degrees_to_turn, robot):
 def move_robot_head(degrees_for_head, robot):
     print("MOVE COZMO HEAD")
     try:
-        robot.set_head_angle(degrees(int(degrees_for_head)), in_parallel=True).wait_for_completed()
+        robot.set_head_angle(degrees(int(degrees_for_head))).wait_for_completed()
     except:
         print(sys.exc_info()[0])
 
