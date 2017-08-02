@@ -621,6 +621,7 @@ def set_cube_lights(cube_id, color_cube, flash_enable, robot):
         print("SETTING CUBE LIGHTS")
         print("Getting cube for LightCube1Id")
         cube_light_1= robot.world.get_light_cube(LightCube1Id)
+        print("xxxxx")
         print("LightCube1Id es %s " % cube_light_1.object_id())
         print("Getting cube for LightCube2Id")
         cube_light_2= robot.world.get_light_cube(LightCube2Id)
