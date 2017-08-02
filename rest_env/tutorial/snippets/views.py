@@ -619,15 +619,9 @@ def play_animation(animation_id, robot):
 def set_cube_lights(cube_id, color_cube, flash_enable, robot):
     try:
         print("SETTING CUBE LIGHTS")
-        print("Getting cube for LightCube1Id")
         cube_light_1= robot.world.get_light_cube(LightCube1Id)
-        print("LightCube1Id es %s " % cube_light_1.object_id)
-        print("Getting cube for LightCube2Id")
         cube_light_2= robot.world.get_light_cube(LightCube2Id)
-        print("LightCube2Id es %s " % cube_light_2.object_id)
-        print("Getting cube for LightCube3Id")
         cube_light_3= robot.world.get_light_cube(LightCube3Id)
-        print("LightCube3Id es %s " % cube_light_3.object_id)
         if str(cube_id) == str(cube_light_1.object_id):
             print("SETTING CUBE LIGHTS FOR CUBE 1")
             cube_to_set_light = cube_light_1
@@ -637,8 +631,6 @@ def set_cube_lights(cube_id, color_cube, flash_enable, robot):
         else:
             print("SETTING CUBE LIGHTS FOR CUBE 3")
             cube_to_set_light = cube_light_3
-
-        print("A ver que CUBE ENCIENDO... %s" % str(cube_to_set_light.object_id))
 
         if color_cube == "RED":
             if flash_enable == "YES":
