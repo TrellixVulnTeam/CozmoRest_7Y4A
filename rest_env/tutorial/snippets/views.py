@@ -626,33 +626,33 @@ def set_cube_lights(cube_id, color_cube, flash_enable, robot):
     print("SETTING CUBE LIGHTS")
     if cube_id == "1":
         print("SETTING CUBE LIGHTS FOR CUBE 1")
-        cube = robot.world.get_light_cube(LightCube1Id)
+        cube_to_set_light = robot.world.get_light_cube(LightCube1Id)
     elif cube_id == "2":
         print("SETTING CUBE LIGHTS FOR CUBE 2")
-        cube = robot.world.get_light_cube(LightCube2Id)
+        cube_to_set_light = robot.world.get_light_cube(LightCube2Id)
     else:
         print("SETTING CUBE LIGHTS FOR CUBE 3")
-        cube = robot.world.get_light_cube(LightCube3Id)
+        cube_to_set_light = robot.world.get_light_cube(LightCube3Id)
 
-    print("A ver que CUBE ENCIENDO... %s" % str(cube.object_id))
+    print("A ver que CUBE ENCIENDO... %s" % str(cube_to_set_light.object_id))
 
     if color_cube == "RED":
         if flash_enable == "YES":
-            cube.set_lights(cozmo.lights.red_light.flash())
+            cube_to_set_light.set_lights(cozmo.lights.red_light.flash())
         else:
-            cube.set_lights(cozmo.lights.red_light)
+            cube_to_set_light.set_lights(cozmo.lights.red_light)
     elif color_cube == "BLUE":
         if flash_enable == "YES":
-            cube.set_lights(cozmo.lights.blue_light.flash())
+            cube_to_set_light.set_lights(cozmo.lights.blue_light.flash())
         else:
-            cube.set_lights(cozmo.lights.blue_light)
+            cube_to_set_light.set_lights(cozmo.lights.blue_light)
     elif color_cube == "GREEN":
         if flash_enable == "YES":
-            cube.set_lights(cozmo.lights.green_light.flash())
+            cube_to_set_light.set_lights(cozmo.lights.green_light.flash())
         else:
-            cube.set_lights(cozmo.lights.green_light)
+            cube_to_set_light.set_lights(cozmo.lights.green_light)
     else:
-        cube.set_light_corners(None, None, None, None)
+        cube_to_set_light.set_light_corners(None, None, None, None)
 # -------------------------------------------------------
 # FUNCTION: ROBOT TO MOVE HIS LIFT "lift_degrees" DEGREES
 # -------------------------------------------------------
