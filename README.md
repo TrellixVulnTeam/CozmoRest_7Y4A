@@ -9,6 +9,9 @@ Rest Server to control Cozmo remotely
   python manage.py runserver (localhost and 8001) <br>
   python manage.py runserver 0.0.0.0:<your_port> (to customize listen address and listen port) <br>
 
+## STARTUP SCRIPT:
+  /home/pi/CozmoRest/startRestServer.sh
+
 ## INVOKE COZMO COMMANDS:
   http://your_address:port/snippets/
 
