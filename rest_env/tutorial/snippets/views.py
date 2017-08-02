@@ -457,7 +457,7 @@ def run_commands(robot, commands_to_cozmo):
                 cube_id = x['params'][0]['CUBE_ID']
                 color_cube = x['params'][1]['COLOR']
                 flash_enable = x['params'][2]['FLASH']
-                set_cube_lights(cube_id, color_cube, color_cube_time, flash_enable, robot)
+                set_cube_lights(cube_id, color_cube, flash_enable, robot)
             elif x['command'] == "MOVE_LIFT":
                 lift_degrees = x['params'][0]['degrees']
                 move_cozmo_lift(lift_degrees, robot)
