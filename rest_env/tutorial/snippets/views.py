@@ -625,10 +625,10 @@ def set_cube_lights(cube_id, color_cube, flash_enable, robot):
         cube_light_2= robot.world.get_light_cube(LightCube2Id)
         print("Getting cube for LightCube3Id")
         cube_light_3= robot.world.get_light_cube(LightCube3Id)
-        if cube_id == cube_light_1.object_id:
+        if str(cube_id) == str(cube_light_1.object_id()):
             print("SETTING CUBE LIGHTS FOR CUBE 1")
             cube_to_set_light = cube_light_1
-        elif cube_id == cube_light_2.object_id():
+        elif str(cube_id) == str(cube_light_2.object_id()):
             print("SETTING CUBE LIGHTS FOR CUBE 2")
             cube_to_set_light = cube_light_2
         else:
