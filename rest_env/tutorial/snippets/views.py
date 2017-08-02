@@ -549,13 +549,7 @@ def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot
             print("    Time To Drive = %s " % time_to_drive)
             print("    Robot = %s " % robot)
     try:
-        action = robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1000, r_wheel_acc=1000, duration=float(time_to_drive))
-
-        if debug == "ON":
-            print("got action", action)
-        result = action.wait_for_completed(timeout=30)
-        if debug == "ON":
-                print("got action result", result)
+        robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1000, r_wheel_acc=1000, duration=float(time_to_drive))
     except:
         print(sys.exc_info()[0])
 
@@ -623,39 +617,46 @@ def play_animation(animation_id, robot):
 # -----------------------------------------------------------------------------------------------------
 
 def set_cube_lights(cube_id, color_cube, flash_enable, robot):
-    print("SETTING CUBE LIGHTS")
-    cube_light_1= robot.world.get_light_cube(LightCube1Id)
-    cube_light_2= robot.world.get_light_cube(LightCube2Id)
-    cube_light_3= robot.world.get_light_cube(LightCube3Id)
-    if cube_id == str(cube_light_1.object_id()):
-        print("SETTING CUBE LIGHTS FOR CUBE 1")
-        cube_to_set_light = cube_light_1
-    elif cube_id == str(cube_light_2.object_id()):
-        print("SETTING CUBE LIGHTS FOR CUBE 2")
-        cube_to_set_light = cube_light_2
-    else:
-        print("SETTING CUBE LIGHTS FOR CUBE 3")
-        cube_to_set_light = cube_light_3
+    try:
+        print("SETTING CUBE LIGHTS")
+        print("Getting cube for LightCube1Id")
+        cube_light_1= robot.world.get_light_cube(LightCube1Id)
+        print("Getting cube for LightCube2Id")
+        cube_light_2= robot.world.get_light_cube(LightCube2Id)
+        print("Getting cube for LightCube3Id")
+        cube_light_3= robot.world.get_light_cube(LightCube3Id)
+        if cube_id == str(cube_light_1.object_id()):
+            print("SETTING CUBE LIGHTS FOR CUBE 1")
+            cube_to_set_light = cube_light_1
+        elif cube_id == str(cube_light_2.object_id()):
+            print("SETTING CUBE LIGHTS FOR CUBE 2")
+            cube_to_set_light = cube_light_2
+        else:
+            print("SETTING CUBE LIGHTS FOR CUBE 3")
+            cube_to_set_light = cube_light_3
 
-    print("A ver que CUBE ENCIENDO... %s" % str(cube_to_set_light.object_id))
+        print("A ver que CUBE ENCIENDO... %s" % str(cube_to_set_light.object_id))
 
-    if color_cube == "RED":
-        if flash_enable == "YES":
-            cube_to_set_light.set_lights(cozmo.lights.red_light.flash())
+        if color_cube == "RED":
+            if flash_enable == "YES":
+                cube_to_set_light.set_lights(cozmo.lights.red_light.flash())
+            else:
+                cube_to_set_light.set_lights(cozmo.lights.red_light)
+        elif color_cube == "BLUE":
+            if flash_enable == "YES":
+                cube_to_set_light.set_lights(cozmo.lights.blue_light.flash())
+            else:
+                cube_to_set_light.set_lights(cozmo.lights.blue_light)
+        elif color_cube == "GREEN":
+            if flash_enable == "YES":
+                cube_to_set_light.set_lights(cozmo.lights.green_light.flash())
+            else:
+                cube_to_set_light.set_lights(cozmo.lights.green_light)
         else:
-            cube_to_set_light.set_lights(cozmo.lights.red_light)
-    elif color_cube == "BLUE":
-        if flash_enable == "YES":
-            cube_to_set_light.set_lights(cozmo.lights.blue_light.flash())
-        else:
-            cube_to_set_light.set_lights(cozmo.lights.blue_light)
-    elif color_cube == "GREEN":
-        if flash_enable == "YES":
-            cube_to_set_light.set_lights(cozmo.lights.green_light.flash())
-        else:
-            cube_to_set_light.set_lights(cozmo.lights.green_light)
-    else:
-        cube_to_set_light.set_light_corners(None, None, None, None)
+            cube_to_set_light.set_light_corners(None, None, None, None)
+    except:
+        print(sys.exc_info()[0])
+
 # -------------------------------------------------------
 # FUNCTION: ROBOT TO MOVE HIS LIFT "lift_degrees" DEGREES
 # -------------------------------------------------------
