@@ -13,7 +13,9 @@ Rest Server to control Cozmo remotely
   /home/pi/CozmoRest/startRestServer.sh
 
 ## INVOKE COZMO COMMANDS:
-  http://your_address:port/snippets/
+  Calling the RPI:  http://your_address:port/snippets/  (IP and Port has been set in startRestServer.sh)<br>
+  Calling API Platform Gateway: http://192.168.0.69:8011/Cozmo or http://new.proxy.digitalpracticespain.com:18001/Cozmo
+  
 
 ## COZMO CUSTOM CODE
   All commands and variables can be check at rest_env\tutorial\snippets\views.py <br>
