@@ -634,6 +634,8 @@ def set_cube_lights(cube_id, color_cube, flash_enable, robot):
         print("SETTING CUBE LIGHTS FOR CUBE 3")
         cube = robot.world.get_light_cube(LightCube3Id)
 
+    print("A ver que CUBE ENCIENDO... %s" % str(cube.object_id))
+
     if color_cube == "RED":
         if flash_enable == "YES":
             cube.set_lights(cozmo.lights.red_light.flash())
@@ -691,9 +693,11 @@ def find_cube(cube_number, robot):
         cube_found = None
         for cube in cubes:
             if (str(cube.object_id) == str(cube_number)):
+                print("ENCONTRADO EL CUBO QUE BUSCO: %s" %  str(cube.object_id))
                 cube_found = cube
 
     if cube_found:
+        print("Return Cube %s" % str(cube.object_id))
         return cube_found
     else:
         print ("CUBE NOT FOUND")
