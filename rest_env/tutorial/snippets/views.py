@@ -525,11 +525,10 @@ def say(text_to_say, robot):
 # --------------------------------------------------------------------------------------------
 
 def go(distance_to_go, speed_to_go, robot):
-    if debug == "ON":
-        print("COZMO TO GO")
-        print("    Distance to go = %s " % distance_to_go)
-        print("    Speed to go = %s " % speed_to_go)
-        print("    Robot = %s " % robot)
+    print("COZMO TO GO")
+    print("    Distance to go = %s " % distance_to_go)
+    print("    Speed to go = %s " % speed_to_go)
+    print("    Robot = %s " % robot)
     try:
         robot.drive_straight(distance_mm(distance_to_go), speed_mmps(speed_to_go)).wait_for_completed()
         if debug == "ON":
@@ -542,12 +541,11 @@ def go(distance_to_go, speed_to_go, robot):
 # -----------------------------------------------------------------
 
 def robot_drive_wheels(speed_left_wheel, speed_right_wheel, time_to_drive, robot):
-    if debug == "ON":
-            print("COZMO DRIVE WHEELS")
-            print("    Speed Left = %s " % speed_left_wheel)
-            print("    Speed Right= %s " % speed_right_wheel)
-            print("    Time To Drive = %s " % time_to_drive)
-            print("    Robot = %s " % robot)
+    print("COZMO DRIVE WHEELS")
+    print("    Speed Left = %s " % speed_left_wheel)
+    print("    Speed Right= %s " % speed_right_wheel)
+    print("    Time To Drive = %s " % time_to_drive)
+    print("    Robot = %s " % robot)
     try:
         robot.drive_wheels(speed_left_wheel, speed_right_wheel, l_wheel_acc=1000, r_wheel_acc=1000, duration=float(time_to_drive))
     except:
@@ -619,22 +617,29 @@ def play_animation(animation_id, robot):
 def set_cube_lights(cube_id, color_cube, flash_enable, robot):
     try:
         print("SETTING CUBE LIGHTS")
-        cube_light_1= robot.world.get_light_cube(LightCube1Id)
-        cube_light_2= robot.world.get_light_cube(LightCube2Id)
-        cube_light_3= robot.world.get_light_cube(LightCube3Id)
-        if str(cube_id) == str(cube_light_1.object_id):
+        cube_light_1 = robot.world.get_light_cube(LightCube1Id)  # looks like a paperclip
+        cube_light_2 = robot.world.get_light_cube(LightCube2Id)  # looks like a lamp / heart
+        cube_light_3 = robot.world.get_light_cube(LightCube3Id)  # looks like the letters 'ab' over 'T'
+
+        if str(cube_id) == "1":
             print("SETTING CUBE LIGHTS FOR CUBE 1")
             cube_to_set_light = cube_light_1
-        elif str(cube_id) == str(cube_light_2.object_id):
+        elif str(cube_id) == "2":
             print("SETTING CUBE LIGHTS FOR CUBE 2")
             cube_to_set_light = cube_light_2
         else:
             print("SETTING CUBE LIGHTS FOR CUBE 3")
             cube_to_set_light = cube_light_3
 
+        if cube_to_set_light is None:
+            print("NO HAY CUBO DE LUCES")
+
         if color_cube == "RED":
+            print("Setting light cube to RED")
             if flash_enable == "YES":
+                print("Setting light cube to RED and FLASH")
                 cube_to_set_light.set_lights(cozmo.lights.red_light.flash())
+                print("CUBE LIGHT SET successfully")
             else:
                 cube_to_set_light.set_lights(cozmo.lights.red_light)
         elif color_cube == "BLUE":
@@ -678,6 +683,17 @@ def cozmo_go_to_pose(go_to_axis_x, go_to_axis_y, go_to_retry, go_to_rotation_ang
 def find_cube(cube_number, robot):
     print("SEARCHING CUBE %s" % cube_number)
 
+    lightCube_target = None
+    if str(cube_number) == "1":
+        print("SETTING CUBE LIGHTS FOR CUBE 1")
+        lightCube_target = robot.world.get_light_cube(LightCube1Id)
+    elif str(cube_number) == "2":
+        print("SETTING CUBE LIGHTS FOR CUBE 2")
+        lightCube_target = robot.world.get_light_cube(LightCube2Id)
+    else:
+        print("SETTING CUBE LIGHTS FOR CUBE 3")
+        lightCube_target = robot.world.get_light_cube(LightCube3Id)
+
     # Lookaround until Cozmo knows where at least 2 cubes are:
     lookaround = robot.start_behavior(cozmo.behavior.BehaviorTypes.LookAroundInPlace)
     cubes = None
@@ -691,7 +707,7 @@ def find_cube(cube_number, robot):
     else:
         cube_found = None
         for cube in cubes:
-            if (str(cube.object_id) == str(cube_number)):
+            if (str(cube.object_id) == str(lightCube_target.object_id)):
                 print("ENCONTRADO EL CUBO QUE BUSCO: %s" %  str(cube.object_id))
                 cube_found = cube
 
